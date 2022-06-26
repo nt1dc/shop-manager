@@ -20,11 +20,15 @@ import java.util.UUID;
 @RestController("")
 @Data
 public class ShopUnitController {
-
     private final ShopUnitService service;
 
     public ShopUnitController(ShopUnitService service) {
         this.service = service;
+    }
+
+    @GetMapping("/zxc")
+    public String zxc(){
+        return "zxc";
     }
 
     @PostMapping("/imports")
