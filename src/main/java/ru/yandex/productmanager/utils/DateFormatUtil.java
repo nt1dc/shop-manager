@@ -8,9 +8,8 @@ public class DateFormatUtil {
         try {
             Date formatDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(date);
             return formatDate;
-        }catch (Exception parseException){
+        } catch (Exception parseException) {
             throw new IllegalArgumentException("date parse ex");
         }
-
     }
 }

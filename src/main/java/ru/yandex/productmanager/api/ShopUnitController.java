@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.productmanager.dto.ShopUnitImportRequest;
 import ru.yandex.productmanager.dto.ShopUnitStatisticUnit;
@@ -28,12 +29,14 @@ public class ShopUnitController {
     }
 
     @PostMapping("/imports")
+    @Async
     public ResponseEntity postImports(@Valid @RequestBody ShopUnitImportRequest importRequest) {
 
         service.importShopUnit(importRequest.getItems(), importRequest.getUpdateDate());
         return ResponseEntity.ok().build();
     }
 
+    @Async
     @DeleteMapping("/delete/{id}")
     public ResponseEntity delete(@PathVariable("id") @NotNull UUID id) {
 
@@ -43,6 +46,7 @@ public class ShopUnitController {
 
     }
 
+    @Async
     @NonNull
     @GetMapping("/nodes/{id}")
     private ResponseEntity<ShopUnit> getNodes(@PathVariable("id") UUID id) {
@@ -50,6 +54,7 @@ public class ShopUnitController {
         return ResponseEntity.ok().body(shopUnit);
     }
 
+    @Async
     @NonNull
     @GetMapping("/sales")
     private ResponseEntity<List<ShopUnitStatisticUnit>> getSales(@RequestParam String date) throws IllegalArgumentException {
@@ -58,6 +63,7 @@ public class ShopUnitController {
     }
 
 
+    @Async
     @NonNull
     @GetMapping("/node/{id}/statistic")
     private ResponseEntity<List<ShopUnitHistoryRecord>> statistic(@PathVariable("id") UUID id, @RequestParam String dateStart, @RequestParam String dateEnd) {
