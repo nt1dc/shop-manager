@@ -9,7 +9,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.concurrent.Executor;
 
 @SpringBootApplication
-@EnableAsync
 public class ProductManagerApplication {
 
     public static void main(String[] args) {
