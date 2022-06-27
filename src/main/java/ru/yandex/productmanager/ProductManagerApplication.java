@@ -15,13 +15,4 @@ public class ProductManagerApplication {
         SpringApplication.run(ProductManagerApplication.class, args);
     }
 
-    @Bean
-    public Executor executor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(5);
-        executor.setMaxPoolSize(5);
-        executor.setQueueCapacity(500);
-        executor.initialize();
-        return executor;
-    }
 }

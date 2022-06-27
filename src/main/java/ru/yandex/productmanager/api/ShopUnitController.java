@@ -17,7 +17,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@RestController("")
+@RestController()
+@RequestMapping("/")
 @Data
 public class ShopUnitController {
     private final ShopUnitService service;
