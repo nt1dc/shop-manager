@@ -1,20 +1,17 @@
 package ru.yandex.productmanager.api;
 
-import org.springframework.http.HttpHeaders;
+import org.hibernate.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.MissingPathVariableException;
-import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ru.yandex.productmanager.dto.Error;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.NoSuchElementException;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class RestResponseEntityExceptionHandler
         extends ResponseEntityExceptionHandler {
 
@@ -26,13 +23,14 @@ public class RestResponseEntityExceptionHandler
     }
 
 
-    @ExceptionHandler(value
-            = {Exception.class})
-    protected ResponseEntity<Error> validationHandler(
-            RuntimeException ex, WebRequest request) {
-        return ResponseEntity.status(400).body(new Error(400, "Validation Failed"));
-    }
 
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(value=HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public Error handleTypeMismatchException(HttpServletRequest req, TypeMismatchException ex) {
+        return new Error(400,"validation failed");
+    }
 
 
 }

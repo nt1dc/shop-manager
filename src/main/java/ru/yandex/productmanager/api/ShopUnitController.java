@@ -78,10 +78,5 @@ public class ShopUnitController {
 
 
 
-    @ExceptionHandler(TypeMismatchException.class)
-    @ResponseStatus(value=HttpStatus.NOT_FOUND)
-    @ResponseBody
-    public Error handleTypeMismatchException(HttpServletRequest req, TypeMismatchException ex) {
-        return new Error(404,"validation failed");
-    }
+
 }
