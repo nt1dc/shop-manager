@@ -17,6 +17,7 @@ public interface ShopUnitService {
     ShopUnit getNodes(UUID id);
 
     void deleteNode(UUID id);
+
     List<ShopUnitStatisticUnit> sales(Date date);
 
     List<ShopUnitHistoryRecord> getStatistic(UUID id, Date dateStart, Date dateEnd);

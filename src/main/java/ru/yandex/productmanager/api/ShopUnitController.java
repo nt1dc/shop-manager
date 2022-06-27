@@ -2,20 +2,16 @@ package ru.yandex.productmanager.api;
 
 import com.sun.istack.NotNull;
 import lombok.Data;
-import org.hibernate.TypeMismatchException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.productmanager.dto.Error;
 import ru.yandex.productmanager.dto.ShopUnitImportRequest;
 import ru.yandex.productmanager.dto.ShopUnitStatisticUnit;
-import ru.yandex.productmanager.entity.ShopUnitHistoryRecord;
 import ru.yandex.productmanager.entity.ShopUnit;
+import ru.yandex.productmanager.entity.ShopUnitHistoryRecord;
 import ru.yandex.productmanager.service.ShopUnitService;
 import ru.yandex.productmanager.utils.DateFormatUtil;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.Date;

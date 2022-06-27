@@ -19,8 +19,7 @@ import java.util.UUID;
 @Transactional
 public class ShopUnitServiceImplementation implements ShopUnitService {
     final ShopUnitRepository shopUnitRepository;
-    final
-    HistoryRepository historyRepository;
+    final HistoryRepository historyRepository;
 
 
     @Autowired

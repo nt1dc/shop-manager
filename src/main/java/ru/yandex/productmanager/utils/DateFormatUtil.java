@@ -6,8 +6,7 @@ import java.util.Date;
 
 public class DateFormatUtil {
     public static Date format(String date) throws ParseException {
-        Date formatDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(date);
-        return formatDate;
+        return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(date);
 
     }
 }
