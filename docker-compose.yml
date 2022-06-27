@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   service:
-    image: nt1dc/mega-market:latest
+    image: product-manager:0.0.1-SNAPSHOT
     container_name: service_market
     restart: "always"
     environment:
