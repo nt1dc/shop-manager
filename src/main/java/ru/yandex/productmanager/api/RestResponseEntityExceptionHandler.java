@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ru.yandex.productmanager.dto.Error;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,13 +21,10 @@ public class RestResponseEntityExceptionHandler {
     }
 
 
-
-
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(value=HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({Exception.class, TypeMismatchException.class})
     @ResponseBody
-    public Error handleTypeMismatchException(HttpServletRequest req, TypeMismatchException ex) {
-        return new Error(400,"validation failed");
+    public ResponseEntity<Error> handleTypeMismatchException(Exception e) {
+        return ResponseEntity.badRequest().body(new Error(400, "validation failed"));
     }
 
 
