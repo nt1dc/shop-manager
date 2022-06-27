@@ -2,9 +2,12 @@ package ru.yandex.productmanager.api;
 
 import com.sun.istack.NotNull;
 import lombok.Data;
+import org.hibernate.TypeMismatchException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
+import ru.yandex.productmanager.dto.Error;
 import ru.yandex.productmanager.dto.ShopUnitImportRequest;
 import ru.yandex.productmanager.dto.ShopUnitStatisticUnit;
 import ru.yandex.productmanager.entity.ShopUnitHistoryRecord;
@@ -12,6 +15,7 @@ import ru.yandex.productmanager.entity.ShopUnit;
 import ru.yandex.productmanager.service.ShopUnitService;
 import ru.yandex.productmanager.utils.DateFormatUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.Date;
@@ -29,7 +33,7 @@ public class ShopUnitController {
     }
 
     @GetMapping("/zxc")
-    public String zxc(){
+    public String zxc() {
         return "zxc";
     }
 
@@ -57,11 +61,10 @@ public class ShopUnitController {
     @NonNull
     @GetMapping("/sales")
     private ResponseEntity<List<ShopUnitStatisticUnit>> getSales(@RequestParam String date) throws ParseException {
-            Date formatDate = DateFormatUtil.format(date);
-            return ResponseEntity.ok().body(service.sales(formatDate));
+        Date formatDate = DateFormatUtil.format(date);
+        return ResponseEntity.ok().body(service.sales(formatDate));
 
     }
-
 
 
     @NonNull
@@ -73,4 +76,11 @@ public class ShopUnitController {
         return ResponseEntity.ok().body(statisticUnits);
     }
 
+
+    @ExceptionHandler(TypeMismatchException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public ResponseEntity<Error> handleTypeMismatchException(HttpServletRequest req, TypeMismatchException ex) {
+        return ResponseEntity.badRequest().body(new Error(400, "zxc"));
+    }
 }
