@@ -2,6 +2,7 @@ package ru.yandex.productmanager.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import org.springframework.lang.NonNull;
@@ -25,13 +26,15 @@ public class ShopUnitHistoryRecord {
     @NotNull
     private String name;
 
+    @JsonProperty("id")
     private UUID uuid;
 
     @Nullable
     private Integer price;
-
+    @JsonProperty("parentId")
     private UUID parentUUID;
 
+    @JsonIgnore
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date date;
