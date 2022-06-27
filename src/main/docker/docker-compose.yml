@@ -27,6 +27,8 @@ services:
       - POSTGRES_PASSWORD=compose-postgres
     networks:
       - backend
+volumes:
+  my_app_data:
 networks:
   backend:
     driver: bridge
