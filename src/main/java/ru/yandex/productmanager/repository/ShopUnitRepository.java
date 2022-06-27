@@ -12,5 +12,4 @@ import java.util.UUID;
 public interface ShopUnitRepository extends JpaRepository<ShopUnit, UUID> {
 
     List<ShopUnitStatisticUnit> findAllByDateBetweenAndTypeEquals(Date date, Date date2, ShopUnitType type);
-
 }

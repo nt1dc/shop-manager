@@ -57,11 +57,11 @@ public class ShopUnitServiceImplementation implements ShopUnitService {
     @Override
     public ShopUnit getNodes(UUID id) {
         return shopUnitRepository.findById(id).orElseThrow();
-
     }
 
     @Override
     public void deleteNode(UUID id) {
+        shopUnitRepository.findById(id).orElseThrow();
         shopUnitRepository.deleteById(id);
     }
 
@@ -73,6 +73,7 @@ public class ShopUnitServiceImplementation implements ShopUnitService {
 
     @Override
     public List<ShopUnitHistoryRecord> getStatistic(UUID id, Date dateStart, Date dateEnd) {
+        shopUnitRepository.findById(id).orElseThrow();
         return historyRepository.findAllByDateBetweenAndUuid(dateStart, dateEnd, id);
     }
 }

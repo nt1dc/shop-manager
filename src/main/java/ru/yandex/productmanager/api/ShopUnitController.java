@@ -13,6 +13,7 @@ import ru.yandex.productmanager.service.ShopUnitService;
 import ru.yandex.productmanager.utils.DateFormatUtil;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -41,14 +42,12 @@ public class ShopUnitController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity delete(@PathVariable("id") @NotNull UUID id) {
-
         service.deleteNode(id);
         return ResponseEntity.ok().build();
 
 
     }
 
-    @NonNull
     @GetMapping("/nodes/{id}")
     private ResponseEntity<ShopUnit> getNodes(@PathVariable("id") UUID id) {
         ShopUnit shopUnit = service.getNodes(id);
@@ -57,16 +56,17 @@ public class ShopUnitController {
 
     @NonNull
     @GetMapping("/sales")
-    private ResponseEntity<List<ShopUnitStatisticUnit>> getSales(@RequestParam String date) throws IllegalArgumentException {
-        Date formatDate = DateFormatUtil.format(date);
-        return ResponseEntity.ok().body(service.sales(formatDate));
+    private ResponseEntity<List<ShopUnitStatisticUnit>> getSales(@RequestParam String date) throws ParseException {
+            Date formatDate = DateFormatUtil.format(date);
+            return ResponseEntity.ok().body(service.sales(formatDate));
+
     }
 
 
 
     @NonNull
     @GetMapping("/node/{id}/statistic")
-    private ResponseEntity<List<ShopUnitHistoryRecord>> statistic(@PathVariable("id") UUID id, @RequestParam String dateStart, @RequestParam String dateEnd) {
+    private ResponseEntity<List<ShopUnitHistoryRecord>> statistic(@PathVariable("id") UUID id, @RequestParam String dateStart, @RequestParam String dateEnd) throws ParseException {
         Date formatDateStart = DateFormatUtil.format(dateStart);
         Date formatDateEnd = DateFormatUtil.format(dateEnd);
         List<ShopUnitHistoryRecord> statisticUnits = service.getStatistic(id, formatDateStart, formatDateEnd);
