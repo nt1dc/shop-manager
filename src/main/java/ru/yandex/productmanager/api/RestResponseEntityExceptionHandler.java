@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.NoSuchElementException;
 
 @RestControllerAdvice
-public class RestResponseEntityExceptionHandler
-        extends ResponseEntityExceptionHandler {
+public class RestResponseEntityExceptionHandler {
 
     @ExceptionHandler(value
             = {NoSuchElementException.class})
